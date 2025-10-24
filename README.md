@@ -1,9 +1,10 @@
-# Jaztech WordPress
+# wp-coolify
 
-High-performance WordPress + MariaDB template for Coolify. Fixes 413 upload errors and adds WP-CLI.
+High-performance WordPress + MariaDB template for Coolify with security hardening and performance optimizations.
 
-![WordPress](https://img.shields.io/badge/WordPress-latest-blue)
-![MariaDB](https://img.shields.io/badge/MariaDB-11-blue)
+![WordPress](https://img.shields.io/badge/WordPress-6.8.3-blue)
+![MariaDB](https://img.shields.io/badge/MariaDB-11.8.3-blue)
+![GitHub stars](https://img.shields.io/github/stars/jaz-on/wp-coolify)
 
 ![Coolify](https://img.shields.io/badge/Coolify-Ready-green)
 ![Production](https://img.shields.io/badge/Production-Ready-orange)
@@ -11,13 +12,15 @@ High-performance WordPress + MariaDB template for Coolify. Fixes 413 upload erro
 
 ## Features
 
-- **512M uploads** (vs 2M default) - No more 413 errors
-- **600s execution** (vs 30s default) - Large imports/exports  
-- **512M memory** (vs 128M default) - Better performance
-- **10,000 variables** (vs 1000 default) - Large forms support
+- **256M uploads** (vs 2M default) - No more 413 errors
+- **300s execution** (vs 30s default) - Large imports/exports
+- **256M memory** (vs 128M default) - Better performance
+- **5,000 variables** (vs 1000 default) - Large forms support
 - **OPCache enabled** - Production performance
 - **WP-CLI included** - Command line interface
-- **Native php.ini** - More robust than .htaccess
+- **Security hardened** - File editing disabled, secure sessions
+- **Version pinned** - Reproducible deployments
+- **Resource limits** - Prevents resource exhaustion
 
 ## Quick Deploy
 
@@ -27,19 +30,19 @@ High-performance WordPress + MariaDB template for Coolify. Fixes 413 upload erro
    ```
 
 2. **Repository configuration**
-   - Repository URL: `https://github.com/jaz-on/jaztech-wordpress`
+   - Repository URL: `https://github.com/jaz-on/wp-coolify`
    - Build Pack: `Docker Compose`
    - Click Deploy
 
 3. **Configure PHP (one time)**
-   - Go to **Persistent Storages** → Find `wordpress.ini`
+   - Go to **Persistent Storages** → Find `uploads.ini`
    - **Convert to file** → Confirm with filepath
-   - **Edit** → Paste content from `wordpress.ini` in this repo
+   - **Edit** → Paste content from `uploads.ini` in this repo
    - **Save & Restart**
 
-Done. Your WordPress is ready with optimized limits.
+Done. Your secure WordPress is ready.
 
-## 🚀 Live Example
+## Live Example
 
 This template powers:
 - **[jasonrouet.com](https://jasonrouet.com)** - Personal site running on Coolify
@@ -56,6 +59,41 @@ wp plugin list
 wp search-replace old-domain.com new-domain.com
 ```
 
+## vs Official Template
+
+| Setting | Official | This Template |
+|---|---|---|
+| **Upload max** | 2M (413 errors) | **256M** |
+| **Execution time** | 30s | **300s** |
+| **Memory limit** | 128M | **256M** |
+| **File editing** | Enabled (risk) | **Disabled** |
+| **Auto updates** | Enabled (risk) | **Disabled** |
+| **Version** | `latest` (unstable) | **Pinned** |
+| **Resource limits** | None | **Configured** |
+
+## Security Features
+
+- File editing disabled via wp-config
+- Automatic updates disabled (manual control)
+- Secure session configuration
+- PHP functions blacklisted
+- Resource limits prevent DoS
+- Version pinning prevents supply chain attacks
+
+## Advanced Configuration
+
+### Persistent volumes
+- `wordpress-files` - WordPress files (/var/www/html)
+- `mariadb-data` - Database (/var/lib/mysql)
+- `uploads.ini` - PHP config (after conversion)
+
+### Available environment variables
+Coolify auto-generates:
+- `$SERVICE_USER_WORDPRESS` - MySQL user
+- `$SERVICE_PASSWORD_WORDPRESS` - MySQL password
+- `$SERVICE_PASSWORD_ROOT` - MySQL root password
+- `$SERVICE_FQDN_WORDPRESS` - WordPress domain
+
 ## Troubleshooting
 
 **uploads.ini not applied?**
@@ -64,14 +102,18 @@ wp search-replace old-domain.com new-domain.com
 - Service restarted after modification
 
 **413 error persists?**
-- Check PHP config with `phpinfo()`
+- Check PHP config with phpinfo()
 - Restart service completely
+
+**Performance issues?**
+- Monitor resources via Coolify
+- Check OPCache status in WordPress admin
 
 ## License
 
 MIT License - see [LICENSE](LICENSE)
 
-## Author & support
+## Author & Support
 
 Jason Rouet - [jasonrouet.com](https://jasonrouet.com)
 

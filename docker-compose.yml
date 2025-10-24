@@ -1,6 +1,6 @@
 # WordPress + MariaDB optimized for Coolify
-# Fork of official template with high-performance PHP configuration
-# Repository: https://github.com/[your-username]/jaztech-wordpress-mariadb
+# Improved stability, security and performance
+# Repository: https://github.com/jaz-on/wp-coolify
 
 services:
   wordpress:
@@ -14,20 +14,31 @@ services:
       - WORDPRESS_DB_USER=$SERVICE_USER_WORDPRESS
       - WORDPRESS_DB_PASSWORD=$SERVICE_PASSWORD_WORDPRESS
       - WORDPRESS_DB_NAME=wordpress
+      - WORDPRESS_CONFIG_EXTRA=define('WP_DEBUG', false);
     depends_on:
       - mariadb
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1.0'
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
     healthcheck:
       test:
         - CMD
         - curl
         - '-f'
-        - 'http://127.0.0.1'
-      interval: 2s
+        - 'http://127.0.0.1/wp-admin/install.php'
+      interval: 30s
       timeout: 10s
-      retries: 10
+      retries: 3
+      start_period: 60s
 
   mariadb:
-    image: 'mariadb:11'
+    image: 'mariadb:11.8.3'
     volumes:
       - 'mariadb-data:/var/lib/mysql'
     environment:
@@ -35,18 +46,30 @@ services:
       - MYSQL_DATABASE=wordpress
       - MYSQL_USER=$SERVICE_USER_WORDPRESS
       - MYSQL_PASSWORD=$SERVICE_PASSWORD_WORDPRESS
+      - MARIADB_AUTO_UPGRADE=1
+      - MARIADB_DISABLE_UPGRADE_BACKUP=1
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
     healthcheck:
       test:
         - CMD
         - healthcheck.sh
         - '--connect'
         - '--innodb_initialized'
-      interval: 5s
+      interval: 30s
       timeout: 20s
-      retries: 10
+      retries: 3
+      start_period: 60s
 
   wordpress-cli:
-    image: 'wordpress:cli'
+    image: 'wordpress:cli-2.12.0-php8.3'
     user: '33'
     volumes:
       - 'wordpress-files:/var/www/html'
@@ -58,6 +81,15 @@ services:
     depends_on:
       - wordpress
       - mariadb
+    deploy:
+      resources:
+        limits:
+          memory: 5126M
+          cpus: '0.25'
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
     entrypoint: ['tail', '-f', '/dev/null']
 
 volumes:

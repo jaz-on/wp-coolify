@@ -1,14 +1,16 @@
-# JazTech WordPress
+# Jaztech WordPress
 
 High-performance WordPress + MariaDB template for Coolify. Fixes 413 upload errors and adds WP-CLI.
 
-![GitHub](https://img.shields.io/github/license/jaz-on/jaztech-wordpress)
-![GitHub stars](https://img.shields.io/github/stars/jaz-on/jaztech-wordpress)
 ![WordPress](https://img.shields.io/badge/WordPress-latest-blue)
 ![MariaDB](https://img.shields.io/badge/MariaDB-11-blue)
+![GitHub stars](https://img.shields.io/github/stars/jaz-on/jaztech-wordpress)
+
 ![Coolify](https://img.shields.io/badge/Coolify-Ready-green)
 ![Production](https://img.shields.io/badge/Production-Ready-orange)
 ![Live Example](https://img.shields.io/badge/Live%20Example-jasonrouet.com-blue)
+
+[![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20me-red?logo=ko-fi)](https://ko-fi.com/jasonrouet)
 
 ## Features
 
@@ -72,6 +74,8 @@ wp search-replace old-domain.com new-domain.com
 
 MIT License - see [LICENSE](LICENSE)
 
-## Author
+## Author & support
 
 Jason Rouet - [jasonrouet.com](https://jasonrouet.com)
+
+If this template helps you, consider supporting my work: [![Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20me-red?logo=ko-fi&style=for-the-badge)](https://ko-fi.com/jasonrouet)

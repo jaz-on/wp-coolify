@@ -2,8 +2,8 @@
 
 High-performance WordPress + MariaDB template for Coolify with security hardening and performance optimizations.
 
-![WordPress](https://img.shields.io/badge/WordPress-6.8.3-blue)
-![MariaDB](https://img.shields.io/badge/MariaDB-11.8.3-blue)
+![WordPress](https://img.shields.io/badge/WordPress-latest-blue)
+![MariaDB](https://img.shields.io/badge/MariaDB-11-blue)
 ![GitHub stars](https://img.shields.io/github/stars/jaz-on/wp-coolify)
 
 ![Coolify](https://img.shields.io/badge/Coolify-Ready-green)

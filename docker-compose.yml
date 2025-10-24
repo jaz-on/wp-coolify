@@ -63,3 +63,8 @@ services:
 volumes:
   wordpress-files:
   mariadb-data:
+
+networks:
+  default:
+    name: $COOLIFY_NETWORK_NAME
+    external: true

@@ -38,7 +38,7 @@ services:
       start_period: 60s
 
   mariadb:
-    image: 'mariadb:11.8.3'
+    image: 'mariadb:lts'
     volumes:
       - 'mariadb-data:/var/lib/mysql'
     environment:
@@ -69,7 +69,7 @@ services:
       start_period: 60s
 
   wordpress-cli:
-    image: 'wordpress:cli-2.12.0-php8.3'
+    image: 'wordpress:cli'
     user: '33'
     volumes:
       - 'wordpress-files:/var/www/html'
@@ -84,7 +84,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 5126M
+          memory: 256M
           cpus: '0.25'
       restart_policy:
         condition: on-failure

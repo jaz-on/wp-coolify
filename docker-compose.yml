@@ -7,7 +7,6 @@ services:
     volumes:
       - 'wordpress-files:/var/www/html'
       - './uploads.ini:/usr/local/etc/php/conf.d/uploads.ini'
-      - './wp-rest-fix.php:/var/www/html/wp-content/mu-plugins/wp-rest-fix.php'
     environment:
       - SERVICE_FQDN_WORDPRESS
       - WORDPRESS_DB_HOST=mariadb

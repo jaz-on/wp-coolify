@@ -13,7 +13,7 @@ services:
       - WORDPRESS_DB_USER=$SERVICE_USER_WORDPRESS
       - WORDPRESS_DB_PASSWORD=$SERVICE_PASSWORD_WORDPRESS
       - WORDPRESS_DB_NAME=wordpress
-      - WORDPRESS_CONFIG_EXTRA=define('WP_DEBUG', false);
+      - WORDPRESS_CONFIG_EXTRA=define('WP_DEBUG_LOG', true);
     depends_on:
       - mariadb
     deploy:
